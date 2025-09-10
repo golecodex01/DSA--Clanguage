@@ -1,0 +1,313 @@
+/******************************************************************************
+
+                            Online C Compiler.
+                Code, Compile, Run and Debug C program online.
+Write your code in this editor and press "Run" button to compile and execute it.
+
+*******************************************************************************/
+//All Operations  Of Array  
+#include <stdio.h>
+
+
+
+
+int a[10];
+
+//int size=10;
+int currentposition=0;
+
+
+
+
+void DisplayMenu() {
+	printf("PRESS  1 FOR  ADDFirst  \n");
+	printf("PRESS  2 FOR  ADDLAST \n");
+	printf("PRESS  3 FOR  Addindex \n");
+	printf("PRESS  4 FOR  SHORTing  \n");
+	printf("PRESS  5 FOR  searching   \n");
+	printf("PRESS  6 FOR  UPDATE  Fisrt  \n");
+	printf("PRESS  7 FOR  UPDATE Last   \n");
+	printf("PRESS  8 FOR  Updateindex    \n");
+
+	printf("PRESS  9 FOR getmaximum   \n");
+	printf("PRESS  10 FOR  getminimum   \n");
+
+	printf("PRESS  11 FOR  Exit    \n");
+
+	printf("==========================\n");
+}
+
+void updatefirst() {
+	int value;
+	printf("Enter value : \n ");
+	scanf("%d",&value);
+
+	if(currentposition>=0) {
+		a[0]=value;
+	}
+	else {
+		printf("Array is Empty ");
+	}
+}
+void updatelast() {
+	int value;
+	printf("Enter value : \n ");
+	scanf("%d",&value);
+
+	if(currentposition>=0) {
+		a[currentposition]=value;
+	}
+	else {
+		printf("Array is Empty ");
+	}
+	
+	
+	printarray();
+}
+void updateindex() {
+	int value;
+	printf("Enter value : \n ");
+	scanf("%d",&value);
+
+	int index ;
+	printf("Enter index  : \n ");
+	scanf("%d",&index );
+
+	if(currentposition>=0 && index>=0 && index<currentposition) {
+
+		a[index]=value;
+	}
+	else {
+	printf("Array is Empty ");
+}
+}
+
+
+
+void searching() {
+
+	printf("Enter A value to search :");
+	int search, f=0,i;
+	scanf("%d",&search);
+
+
+
+	for(  i=0; i<=currentposition; i++) {
+		if(search==a[i]) {
+			f=1;
+			break;
+		}
+	}
+	if(f==1) {
+		printf("Element Found at %d index \n  ",i);
+	}
+	else {
+		printf("Element Not Found \n  ");
+	}
+
+}
+
+
+
+
+
+
+void ADDLAST() {
+	printf("Enter A value To ADDLASTt :\n");
+	int value;
+	scanf("%d",&value);
+	if(currentposition<10) {
+
+		a[currentposition]=value;
+		currentposition++;
+		printf("After Adding  in last \n");
+		printarray();
+
+	}
+	else {
+		printf("Array if Full");
+	}
+}
+
+
+
+void addfirst() {
+	printf("Enter A value To addfirst :\n");
+	int value;
+	scanf("%d",&value);
+	if(currentposition<10) {
+		for(int i=currentposition; i>0; i--) {
+			a[i]=a[i-1];
+		}
+		a[0]=value;
+		currentposition++;
+		printf("After Adding Fisrt \n");
+		printarray();
+
+	}
+	else {
+		printf("Plaese try again ");
+	}
+}
+
+
+
+void Addindex() {
+	printf("Enter A value To Addindex :\n");
+	int value;
+	scanf("%d",&value);
+
+	printf("Enter Index :\n");
+	int index;
+	scanf("%d",&index);
+
+	if(currentposition<10  && index>=0 && index<currentposition) {
+		currentposition++;
+		for(int i=currentposition; i>index; i--) {
+			a[i]=a[i-1];
+		}
+		a[index]=value;
+		//   currentposition++;
+		printf("After Adding %d on index %d  \n",value,index);
+		printarray();
+
+	}
+	else {
+		printf("Plaese try again ");
+	}
+}
+
+void shorting() {
+
+
+	int temp;
+	for(int i=0; i<currentposition; i++) {
+		for(int j=i+1; j<currentposition; j++) {
+			if(a[i]>a[j]) {
+				temp=a[i];
+				a[i]=a[j];
+				a[j]=temp;
+			}
+		}
+	}
+	printf("After shorting : \n");
+	printarray();
+}
+
+
+void getminimum() {
+	int min=a[0];
+
+
+	for(int i=0; i<=currentposition; i++) {
+		if(a[i]<min) {
+			min=a[i];
+		}
+		else {
+			min=a[0];
+		}
+	}
+	printf("Minimun is %d ",min);
+}
+
+void getmaximum() {
+	int max=a[0];
+
+
+	for(int i=0; i<=currentposition; i++) {
+		if(a[i]>max) {
+			max=a[i];
+		}
+		else {
+			max=a[0];
+		}
+	}
+	printf("Maximun is %d ",max);
+}
+
+
+
+
+
+void  printarray() {
+	for(int i=0; i<currentposition; i++) {
+		printf("%d\n",a[i]);
+	}
+}
+
+
+int main() {
+	int choice;
+
+	do {
+		DisplayMenu();
+		printf("Enter your Choice :\n ");
+		scanf("%d",&choice);
+
+		switch(choice) {
+		case 1:
+			addfirst();
+			printf("\n");
+			break;
+
+		case 2:
+			ADDLAST();
+			printf("\n");
+			break;
+
+		case 3 :
+			Addindex();
+			printf("\n");
+			break;
+
+		case 4:
+			shorting();
+			printf("\n");
+			break;
+
+		case 5:
+			searching();
+			printf("\n");
+			break;
+
+		case 6:
+			updatefirst();
+			printf("\n");
+			break;
+
+		case 7:
+			updatelast();
+			printf("\n");
+			break;
+
+		case 8:
+			Addindex();
+			printf("\n");
+			break;
+
+		case 9:
+			getmaximum();
+			printf("\n");
+			break;
+
+		case 10:
+			getminimum();
+			printf("\n");
+			break;
+
+
+
+
+
+
+		default :
+			printf("Enter again");
+
+
+		}
+
+	} while (choice !=11);
+	return 0;
+}
+
+
