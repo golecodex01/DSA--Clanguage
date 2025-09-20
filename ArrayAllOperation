@@ -1,0 +1,456 @@
+
+#include <stdio.h>
+#define size 10
+
+int data[size];
+int currentposition=-1;
+
+
+    
+  void displayMenu(){
+        printf("Press 1 for Insert at First : \n");
+        printf("Press 2 for Insert at Last : \n");
+        printf("Press 3 for Insert at Index : \n");
+        printf("Press 4 for Remove at First : \n");
+        printf("Press 5 for Remove at Last : \n");
+        printf("Press 6 for Remove at Index : \n");
+        printf("Press 7 for View  First : \n");
+        printf("Press 8 for View Last : \n");
+        printf("Press 9 for View Index : \n"); 
+        printf("Press 10 for UpdateFirst : \n");
+        printf("Press 11 for UpdateLast : \n");
+        printf("Press 12 for UpdateIndex : \n");
+        printf("Press 13 for GetMinimum : \n");
+        printf("Press 14 for GetMaximum : \n");
+        printf("Press 15 for linearSearch : \n");
+        printf("Press 16 for Ascending Shorting : \n");
+        printf("Press 17 for Discending Shorting : \n");
+        printf("Press 18 for BinarySearch : \n");
+    }
+
+void addfirst(int value ) {
+
+	if(currentposition<size) {
+	    	currentposition++;
+		for(int i=currentposition; i>0; i--) {
+			data[i]=data[i-1];
+		}
+		data[0]=value;
+	
+	
+
+	}
+	else {
+		printf("Please try again ");
+	}
+}
+
+ void addLast(int value ) {
+
+	if(currentposition<size) {
+
+		data[currentposition]=value;
+		currentposition++;
+		printf("After Adding  in last \n");
+	
+
+	}
+	else {
+		printf("Array if Full");
+	}
+}
+
+void addIndex(int index,int value) {
+	
+
+	if(currentposition<10  && index>=0 && index<currentposition) {
+		currentposition++;
+		for(int i=currentposition; i>index; i--) {
+			data[i]=data[i-1];
+		}
+		data[index]=value;
+		//   currentposition++;
+		printf("After Adding %d on index %d  \n",value,index);
+		
+
+	}
+	else {
+		printf("Plaese try again ");
+	}
+}
+
+void removeFirst(){
+    if(currentposition>=0){
+        for(int i=0;i<currentposition;i++){
+            data[i]=data[i+1];
+        }
+        currentposition--;
+    }
+}
+
+
+void removeLast(){
+    if(currentposition>=0){
+       
+        currentposition--;
+    }
+}
+
+
+void removeIndex(int index){
+    if(currentposition>=0 && index>=0 && index<=currentposition){
+        for(int i=index;i<currentposition;i++){
+            data[i]=data[i+1];
+        }
+        currentposition--;
+    }
+}
+
+
+void viewFirst(){
+    if(currentposition>=0){
+       printf("First value is %d ",data[0]);
+    }
+    else {
+        printf("Array is Empty ");
+    }
+}
+
+void viewLast(){
+    if(currentposition>=0){
+       printf("First value is %d ",data[currentposition]);
+    }
+    else {
+        printf("Array is Empty ");
+    }
+}
+
+void viewIndex(int index ){
+    if(currentposition>=0 && index>=0 && index<=currentposition ){
+       printf("First value is %d ",data[index]);
+    }
+    else {
+        printf("Array is Empty ");
+    }
+}
+
+void updatefirst(int value ) {
+
+	if(currentposition>=0) {
+		data[0]=value;
+	}
+	else {
+		printf("Array is Empty ");
+	}
+}
+
+void updatelast(int value ) {
+
+
+	if(currentposition>=0) {
+		data[currentposition]=value;
+	}
+	else {
+		printf("Array is Empty ");
+	}
+	
+}
+void updateindex(int index ,int value) {
+
+	if(currentposition>=0 && index>=0 && index<currentposition) {
+
+		data[index]=value;
+	}
+	else {
+	printf("Array is Empty ");
+}
+}
+
+
+void getMinimum() {
+	int min=data[0];
+
+
+	for(int i=0; i<=currentposition; i++) {
+		if(data[i]<min) {
+			min=data[i];
+		}
+		else {
+			min=data[0];
+		}
+	}
+	printf("Minimun is %d ",min);
+}
+
+void getMaximum() {
+	int max=data[0];
+
+
+	for(int i=0; i<=currentposition; i++) {
+		if(data[i]>max) {
+			max=data[i];
+		}
+		else {
+			max=data[0];
+		}
+	}
+	printf("Maximun is %d ",max);
+}
+
+void linearSearch(int value ){
+    
+    if(currentposition>=0){
+        int f=0;
+        for(int i=0;i<=currentposition;i++){
+            if(data[i]==value){
+                f=1;
+                break;
+            }
+        }
+        if(f==1){
+            printf("Element is Found ");
+        }
+        else{
+            printf("Not Found ");
+        }
+    }
+    else{
+        printf("Array is Empty ");
+    }
+    
+}
+
+void ascendingShorting() {
+
+
+	int temp;
+	for(int i=0; i<currentposition; i++) {
+		for(int j=i+1; j<currentposition; j++) {
+			if(data[i]>data[j]) {
+				temp=data[j];
+				data[i]=data[j];
+				data[i]=temp;
+			}
+		}
+	}
+
+}
+
+void descendingShorting() {
+
+
+	int temp;
+	for(int i=0; i<currentposition; i++) {
+		for(int j=i+1; j<currentposition; j++) {
+			if(data[i]<data[j]) {
+				temp=data[j];
+				data[i]=data[j];
+				data[i]=temp;
+			}
+		}
+	}
+
+}
+
+
+void  printArray() {
+	for(int i=0; i<=currentposition; i++) {
+		printf("%d\n",data[i]);
+	}
+}
+
+void BinarySearch(int value){
+    
+    if(currentposition>=0){
+        ascendingShorting();
+        
+        int low =0,f=0;
+        int high=currentposition;
+        int medium=(low+high)/2;
+        
+        if(value==data[medium]){
+            f=1;
+            
+        }
+        if(value>data[medium]){
+            
+            for(int i=medium ;i<=currentposition;i++){
+                if(data[i]==value){
+                    f=1;
+                    break;
+                }
+            }
+            
+        }
+        else
+        {
+            for(int i = medium;i>=0;i--){
+                if(data[i]==value){
+                    f=1;
+                    break;
+                }
+            }
+        }
+        
+       if(f==1){
+           printf("Element Found");
+       }   
+        else
+        {
+             printf("Element Not Found");
+        }
+    }
+    else{
+        printf("Array is Empty ");
+    }
+}
+
+    
+
+
+int main()
+{
+    int element;
+    int choice;
+    int index;
+     
+    do{
+        displayMenu();
+        printf("\n \n ");
+        printf("Enter your Choice : ");
+        scanf("%d",&choice);
+        
+        switch(choice){
+            
+            case 1:
+            printf("Enter value to Insert");
+            scanf("%d",&element);
+            addfirst(element);
+           printArray();
+            break;
+            
+            case 2:
+            printf("Enter value to Insert : ");
+            scanf("%d",&element);
+            addLast(element);
+          printArray();
+            break;
+            
+             case 3:
+            printf("\nEnter value to Insert : ");
+            scanf("%d",&element);
+            
+            printf("Enter Index\n");
+            scanf("%d",&index);
+            addIndex(index,element);
+            printArray();
+            break;
+            
+              case 4:
+            removeFirst();
+            printArray();
+            break;
+            
+            case 5:
+            removeLast();
+            printArray();
+            break;
+            
+             case 6:
+           
+            printf("Enter Index\n");
+            scanf("%d",&index);
+           removeIndex(index);
+           printArray();
+            break;
+            
+             case 7:
+           viewFirst();
+            break;
+            
+            
+             case 8:
+            viewLast();
+            break;
+            
+               case 9:
+               printf("Enter Index \n ");
+               scanf("%d",&index);
+               
+              viewIndex( index);
+              break;
+            
+            
+             case 10:
+              printf("\nEnter value to Update First  :\n  ");
+            scanf("%d",&element);
+              updatefirst(element);
+             printArray();
+              break;
+              
+              
+             case 11:
+              printf("\nEnter value to Update Last  : \n  ");
+            scanf("%d",&element);
+              updatelast(element);
+              printArray();
+              break;
+            
+              case 12:
+              printf("\nEnter value to Update Index   : \n  ");
+            scanf("%d",&element);
+            
+            printf("\nEnter  Index   : \n  ");
+            scanf("%d",&index);
+              updatelast(element);
+              printArray();
+              break;
+              
+             case 13:
+            getMinimum();
+            break;  
+            
+            case 14:
+            getMaximum();
+            break; 
+            
+            
+            case 15:
+              printf("\nEnter element to Search   : \n  ");
+            scanf("%d",&element);
+              linearSearch(element);
+              break;
+            
+            
+              case 16 : 
+              ascendingShorting();
+            
+            
+            case 17 : 
+              descendingShorting();
+              
+              
+              case 18:
+              printf("\nEnter element to Search   : \n  ");
+            scanf("%d",&element);
+              BinarySearch( element);
+              break;
+            
+          
+            default :
+            printf("\nEnter Again\n  ");
+            
+        }
+        
+        printf("Do You want to continue : \n ");
+         printf("To continue press 1  : \n ");
+        printf("To End press 0 : \n ");
+        scanf("%d",&choice);
+
+        
+    }
+    while(choice!=0);
+    
+  
+    return 0;
+}
