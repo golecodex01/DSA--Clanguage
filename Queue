@@ -1,0 +1,121 @@
+/*************************************************************************
+Queue ALl Operration Done By Mohit Gole 
+*******************************************************************************/
+
+#include <stdio.h>
+
+#define size 10 
+
+int queue[size];
+int head =-1;
+int tail=-1;
+
+
+
+void inQueue(int value) {
+    if (tail == size - 1) {
+        printf("Queue is Full\n");
+        return;
+    }
+
+    if (head == -1) {
+    
+        head = 0;
+    }
+
+    tail++;
+    queue[tail] = value;
+    printf("value Inserted into queue.\n", value);
+}
+
+
+void display() {
+    if (head == -1) {
+        printf("Queue is Empty\n");
+        return;
+    }
+
+    printf("Queue elements: ");
+    for (int i = head; i <= tail; i++) {
+        printf("%d ", queue[i]);
+    }
+    printf("\n");
+}
+
+void deQueue() {
+    if (head == -1 || head > tail) {
+        printf("Queue is Empty\n");
+        return;
+    }
+   else{
+       
+    printf("Deleted %d from queue.\n", queue[head]);
+    head++;
+}
+    
+    if (head > tail) {
+        head = -1;
+        tail = -1;
+    }
+}
+
+
+void displayMenu(){
+    printf("Press 1 for inQueue\n");
+    printf("Press 2 for deQueue\n");
+    printf("Press 3 for display Queue\n");
+    printf("Press 4 for Exit \n ");
+
+}
+
+
+
+
+
+
+
+
+int main() {
+    int choice, value;
+    int ch;
+
+    do  {
+        displayMenu();
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
+
+        switch (choice) {
+            case 1:
+                printf("Enter value to insert: ");
+                scanf("%d", &value);
+                inQueue(value);
+                break;
+
+            case 2:
+                deQueue();
+                break;
+
+            case 3:
+                display();
+                break;
+
+            case 4:
+                printf("Exiting program\n");
+                return 0;
+
+            default:
+                printf("Invalid choice  Try again.\n");
+        }
+        
+        printf("Do you want to continue\n ");
+        printf("press 1 for Yes \n ");
+        
+        printf("press 0 for NO \n ");
+        
+        scanf("%d",&ch);
+    }
+    while(ch!=0);
+    
+
+    return 0;
+}
